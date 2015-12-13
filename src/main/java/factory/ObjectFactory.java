@@ -49,9 +49,9 @@ public class ObjectFactory {
     public <T> T createObject(Class<T> type) throws Exception {
         type = resolveImpl(type);   //вернуть класс, если передан интерфейс
         T t = type.newInstance();
-        configure(t);               //все аннотации в классе прочитать
+        configure(t);               //все аннотации в классе прочитать   - в спринге - postProcessBeforeInitialization
         invokeInitMethods(type, t);     //ПостКонсткакт запустить
-        t = configureProxies(type, t);
+        t = configureProxies(type, t);                  // в спринге  - postProcessAfterInitialization
         return t;
     }
 
